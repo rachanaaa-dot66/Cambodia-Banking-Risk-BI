@@ -1,0 +1,21 @@
+branch_id,branch_name,province,city,branch_type,branch_open_date,branch_manager
+1,Phnom Penh Central,Phnom Penh,Phnom Penh,Urban,2018-07-15,Dara Pich
+2,Phnom Penh South,Phnom Penh,Phnom Penh,Urban,2022-08-23,Mony Keo
+3,Phnom Penh North,Phnom Penh,Phnom Penh,Urban,2021-12-05,Ratha Heng
+4,Siem Reap Main,Siem Reap,Siem Reap,Urban,2020-08-19,Bopha Sim
+5,Siem Reap Angkor,Siem Reap,Siem Reap,Urban,2020-08-06,Vibol Chan
+6,Battambang Central,Battambang,Battambang,Urban,2023-02-25,Chenda Nuth
+7,Battambang Rural,Battambang,Bavel,Rural,2018-07-08,Piseth Sar
+8,Kampong Cham Main,Kampong Cham,Kampong Cham,Urban,2022-03-08,Sreymom Lim
+9,Kampong Cham East,Kampong Cham,Cheung Prey,Rural,2019-03-18,Kosal Pen
+10,Kandal Branch,Kandal,Ta Khmau,Urban,2018-07-26,Leakena Ros
+11,Kandal Rural,Kandal,Koh Thom,Rural,2021-02-27,Vannak Ouk
+12,Takeo Branch,Takeo,Takeo,Urban,2023-11-08,Sreynoch Mao
+13,Takeo South,Takeo,Kirivong,Rural,2022-06-01,Phirum Sok
+14,Banteay Meanchey Main,Banteay Meanchey,Sisophon,Urban,2022-07-26,Dina Yim
+15,Banteay Meanchey Rural,Banteay Meanchey,Mongkol Borei,Rural,2022-04-21,Ratana Chhun
+16,Prey Veng Branch,Prey Veng,Prey Veng,Urban,2022-09-19,Veasna Khun
+17,Prey Veng Rural,Prey Veng,Peam Ro,Rural,2021-01-29,Sophea Teng
+18,Phnom Penh East,Phnom Penh,Phnom Penh,Urban,2018-10-08,Makara Hout
+19,Kampong Speu Branch,Kampong Speu,Chbar Mon,Urban,2023-01-14,Kunthea Vong
+20,Koh Kong Branch,Koh Kong,Koh Kong,Rural,2020-09-13,Sokha Chea
