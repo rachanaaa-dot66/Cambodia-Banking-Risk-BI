@@ -8,11 +8,11 @@
 
 | Executive Overview | Customer Analytics |
 |---|---|
-| ![Executive Dashboard](D:\Project 2026\Banking-Risk-BI-Platform\screenshots\executive-overview.png) | ![Customer Dashboard](D:\Project 2026\Banking-Risk-BI-Platform\screenshots\customer-analytics.png) |
+| ![Executive Dashboard](screenshots/executive-overview.png) | ![Customer Dashboard](screenshots/customer-analytics.png) |
 
 | Credit Risk Management | Loan Portfolio Analysis |
 |---|---|
-| ![Risk Dashboard](D:\Project 2026\Banking-Risk-BI-Platform\screenshots\credit-risk.png) | ![Loan Dashboard](D:\Project 2026\Banking-Risk-BI-Platform\screenshots\loan-portfolio.png) |
+| ![Risk Dashboard](screenshots/credit-risk.png) | ![Loan Dashboard](screenshots/loan-portfolio.png) |
 
 ---
 
