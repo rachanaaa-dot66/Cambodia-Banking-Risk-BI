@@ -1,14 +1,47 @@
 # Cambodia Banking Risk & Business Intelligence Platform
 
-A full end-to-end synthetic banking analytics project simulating a medium-sized commercial bank in Cambodia. Covers data generation, ETL, PostgreSQL data warehouse, SQL analytics, and Power BI dashboards.
+> A full end-to-end banking analytics portfolio project by **Anna Enne** — covering synthetic data generation, PostgreSQL data warehouse, SQL analysis, and interactive Power BI dashboards.
 
 ---
 
-## Project Structure
+## 📊 Dashboard Preview
+
+| Executive Overview | Customer Analytics |
+|---|---|
+| ![Executive Dashboard](D:\Project 2026\Banking-Risk-BI-Platform\screenshots\executive-overview.png) | ![Customer Dashboard](D:\Project 2026\Banking-Risk-BI-Platform\screenshots\customer-analytics.png) |
+
+| Credit Risk Management | Loan Portfolio Analysis |
+|---|---|
+| ![Risk Dashboard](D:\Project 2026\Banking-Risk-BI-Platform\screenshots\credit-risk.png) | ![Loan Dashboard](D:\Project 2026\Banking-Risk-BI-Platform\screenshots\loan-portfolio.png) |
+
+---
+
+## 🔍 Key Findings
+
+| KPI | Value | Status |
+|---|---|---|
+| Total Customers | 5,000 | ✅ On Target |
+| Active Customers | 4,434 (88.7%) | ✅ Healthy |
+| Total Loans Outstanding | $39.31M | ✅ Strong |
+| Total Deposits | $23.85M | ✅ Growing |
+| NPL Ratio | 10.61% | ⚠️ Above Target |
+| Average Credit Score | 680 | ✅ Low Risk Band |
+| Total Defaulted Amount | $1.69M | 🔴 Needs Attention |
+| Delinquency Rate (30+) | 6.23% | ⚠️ Watch List |
+
+### Risk Highlights
+- **Highest NPL Province:** Prey Veng (13.19%) — driven by 2024 Agricultural Stress Event
+- **Riskiest Loan Type:** Vehicle Loan (11.2% NPL)
+- **Safest Loan Type:** SME Loan (8.5% NPL)
+- **Customer Growth:** +90% in 2024, +27% in 2025
+
+---
+
+## 🏗️ Project Structure
 
 ```
 Banking-Risk-BI-Platform/
-├── docs/                        ← Project documentation (6 docs)
+├── docs/                        ← 6 project documentation files
 ├── data/
 │   ├── raw/                     ← Generated CSVs (output of python/main.py)
 │   ├── processed/               ← Cleaned & validated CSVs
@@ -25,109 +58,108 @@ Banking-Risk-BI-Platform/
 │   ├── business_analysis/       ← Customer growth, revenue, product KPIs
 │   ├── risk_analysis/           ← NPL, default rate, exposure
 │   └── branch_analysis/         ← Branch performance & risk
-├── powerbi/                     ← Banking_Risk_BI.pbix + screenshots
-├── reports/                     ← PDF reports
+├── docker/
+│   ├── Dockerfile               ← PostgreSQL 16 image
+│   ├── docker-compose.yml       ← postgres + pgAdmin
+│   ├── load_to_docker.py        ← Load CSVs into DB
+│   └── init/                   ← Auto-run SQL on first start
+├── powerbi/
+│   ├── Banking_Risk_BI.pbix     ← Power BI dashboard file
+│   └── screenshots/             ← Dashboard screenshots
+├── reports/
+│   └── Executive_Summary_Anna_Enne.docx
 └── assets/                      ← ERD, architecture diagrams
 ```
 
 ---
 
-## Simulation Overview
+## 🚀 Quick Start
 
-| Parameter | Value |
-|---|---|
-| Simulation Period | Jan 2024 – Dec 2025 (24 months) |
-| Target Customers | 5,000 |
-| Branches | 20 (8 provinces) |
-| Estimated Transactions | ~100,000 |
-| Estimated Loan Payments | ~50,000 |
-| Estimated Snapshots | ~120,000 |
-| Expected Runtime | ~2–3 minutes |
+### Prerequisites
+- Python 3.9+
+- Docker Desktop
+- Power BI Desktop (free)
 
-### Economic Phases
-
-| Year | Phase |
-|---|---|
-| 2021 | Economic Recovery |
-| 2022 | Stable Growth |
-| 2023 | Expansion Period |
-| 2024 | Agricultural Stress Event (Battambang, Takeo, Prey Veng) |
-| 2025 | Tourism Slowdown Event (Siem Reap) |
-
----
-
-## Quick Start
-
-### 1. Install dependencies
+### 1. Install Python dependencies
 
 ```bash
 pip install pandas numpy python-dateutil sqlalchemy psycopg2-binary
 ```
 
-### 2. Run full simulation
+### 2. Generate data
 
 ```bash
 cd python
-python main.py
+python main.py --skip-load
 ```
 
-### 3. Run specific phases only
+### 3. Start PostgreSQL with Docker
 
 ```bash
-python main.py --phases 1 2 3 4 5   # generators only
-python main.py --phases 6 7 8       # simulators only
-python main.py --phases 11 12       # clean + validate only
-python main.py --no-snapshots       # skip 3M snapshot table (dev mode)
-python main.py --skip-load          # skip PostgreSQL load
+cd ../docker
+docker compose up -d
 ```
 
-### 4. PostgreSQL connection
-
-Set environment variables before running Phase 13:
+### 4. Load data into PostgreSQL
 
 ```bash
-export PG_HOST=localhost
-export PG_PORT=5432
-export PG_DBNAME=banking_risk_bi
-export PG_USER=postgres
-export PG_PASSWORD=yourpassword
+python load_to_docker.py --port 5433
 ```
 
-Or create the DB first:
+### 5. Open Power BI
 
-```sql
-CREATE DATABASE banking_risk_bi;
-```
-
-Then run the schema:
-
-```bash
-psql -d banking_risk_bi -f sql/schema/create_tables.sql
-```
+Open `powerbi/Banking_Risk_BI.pbix` — all 4 dashboards ready.
 
 ---
 
-## Generation Phases
+## 📦 Database
+
+| Table | Rows | Description |
+|---|---|---|
+| branches | 20 | 20 branches across 8 provinces |
+| customers | 5,000 | Core customer registry |
+| accounts | 8,234 | Savings, FD, Payroll, Business |
+| loans | 2,679 | 5 loan product types |
+| credit_profiles | 5,000 | Credit scores & risk categories |
+| loan_payments | 24,788 | Monthly payment records |
+| transactions | 753,259 | All account transactions |
+| monthly_customer_snapshot | 65,448 | Monthly balance & score tracking |
+| economic_events | 2 | Simulated macro stress events |
+| **Total** | **864,430** | |
+
+### Connection Details (Docker)
+
+| Field | Value |
+|---|---|
+| Host | localhost |
+| Port | 5433 |
+| Database | banking_risk_bi |
+| User | banking_user |
+| Password | banking2024 |
+
+---
+
+## 🐍 Generation Phases
 
 | Phase | Script | Output |
 |---|---|---|
 | 1 | `generate_branches.py` | `branches.csv` (20 rows) |
-| 2 | `generate_customers.py` | `customers.csv` (50,000 rows) |
-| 3 | `generate_accounts.py` | `accounts.csv` (70,000+ rows) |
-| 4 | `generate_credit_profiles.py` | `credit_profiles.csv` (50,000 rows) |
-| 5 | `generate_loans.py` | `loans.csv` (30,000+ rows) |
-| 6 | `transaction_simulator.py` | `transactions.csv` (1,000,000+ rows) |
-| 7 | `payment_simulator.py` | `loan_payments.csv` (500,000+ rows) |
+| 2 | `generate_customers.py` | `customers.csv` (5,000 rows) |
+| 3 | `generate_accounts.py` | `accounts.csv` (8,234 rows) |
+| 4 | `generate_credit_profiles.py` | `credit_profiles.csv` (5,000 rows) |
+| 5 | `generate_loans.py` | `loans.csv` (2,679 rows) |
+| 6 | `transaction_simulator.py` | `transactions.csv` (753,259 rows) |
+| 7 | `payment_simulator.py` | `loan_payments.csv` (24,788 rows) |
 | 8 | `credit_score_simulator.py` | Updated `credit_profiles.csv` |
 | 9 | `generate_economic_events.py` | `economic_events.csv` (2 rows) |
-| 10 | `monthly_snapshot_simulator.py` | `monthly_customer_snapshot.csv` (3,000,000+ rows) |
+| 10 | `monthly_snapshot_simulator.py` | `monthly_customer_snapshot.csv` (65,448 rows) |
 | 11 | `clean_data.py` | Processed CSVs |
-| 12 | `validate_data.py` | Validation report |
+| 12 | `validate_data.py` | 24/24 validation checks passed ✅ |
 | 13 | `load_postgres.py` | PostgreSQL warehouse |
 
 ---
 
-## KPI Framework
+## 📈 KPI Framework
 
 ### Business Performance
 - **KPI-BP-01** Total Customers
@@ -161,19 +193,20 @@ psql -d banking_risk_bi -f sql/schema/create_tables.sql
 
 ---
 
-## Technology Stack
+## 🛠️ Technology Stack
 
 | Category | Technology |
 |---|---|
 | Data Generation | Python (pandas, numpy) |
-| Database | PostgreSQL |
-| Analytics | SQL |
-| Visualization | Power BI |
+| Database | PostgreSQL 16 |
+| Containerisation | Docker & Docker Compose |
+| Query & Analysis | SQL |
+| Visualisation | Microsoft Power BI Desktop |
 | Documentation | Markdown |
 
 ---
 
-## Documentation
+## 📚 Documentation
 
 | Doc | Title |
 |---|---|
@@ -183,3 +216,5 @@ psql -d banking_risk_bi -f sql/schema/create_tables.sql
 | `docs/04_Data_Model.md` | Entity relationships & data dictionary |
 | `docs/05_Simulation_Logic.md` | Behavioral rules & assumptions |
 | `docs/06_Data_Generation_Roadmap.md` | Implementation blueprint |
+
+---
